@@ -15,7 +15,6 @@ const animals = [
     'images/leopard.png', // Tiger
     'images/parrot.png',  // Parrot
     'images/monkey.png',
-    'images/palestine.png'
 ];
 
 let timer = 60;
