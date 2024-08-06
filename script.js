@@ -201,7 +201,7 @@ function showRandomAnimal() {
             showDebug('Target disappeared after 2 seconds');
             showRandomAnimal(); // Show another animal immediately
         }
-    }, 1500); // 2 seconds delay
+    }, 2000); // 2 seconds delay
 }
 
 // Timer function
