@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jungle Sniper Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Background layer for 3D effect -->
+        <div id="background"></div>
+        
+        <!-- Main game elements -->
+        <div id="sniper-scope">
+            <div id="scope-overlay"></div>
+        </div>
+        <div id="character" style="display: none;">
+            <img src="images/sniper_character.png" alt="Sniper Character" id="sniper-image">
+        </div>
+        <img id="bullet" src="images/bullet.png" alt="Bullet" style="display: none;">
+        <div id="target"></div>
+        <div id="score">Score: 0</div>
+        <div id="timer">Time: 60</div>
+        <button id="replay-button" style="display: none;">Replay</button>
+        <div id="high-score" style="display: none;">High Score: 0</div>
+
+        <audio id="jungle-sound" autoplay loop>
+            <source src="sounds/jungle.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

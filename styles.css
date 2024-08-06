@@ -1,0 +1,186 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #4a6c50; /* Jungle green background */
+    font-family: Arial, sans-serif;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('images/jungle.png'); /* Ensure the path is correct */
+    background-size: cover;
+    background-position: center;
+    perspective: 1000px; /* Add perspective to create a 3D effect */
+    perspective-origin: center; /* Set the perspective origin */
+}
+
+#background {
+    position: absolute;
+    width: 110%; /* Slightly larger than the container for parallax effect */
+    height: 110%; /* Slightly larger than the container for parallax effect */
+    transform-style: preserve-3d; /* Ensure 3D transformations */
+    transition: transform 0.5s ease-out; /* Smooth transition */
+    z-index: 1; /* Ensure background is behind other elements */
+}
+
+/* Optional: Add hover or movement effect to enhance the 3D illusion */
+#game-container:hover #background {
+    transform: translateZ(-50px) scale(1.05); /* Move background further away and slightly scale up */
+}
+
+
+#sniper-scope {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3; /* Above everything */
+}
+
+#scope-overlay {
+    width: 50vmin;
+    height: 50vmin;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 5000px rgba(0, 0, 0, 0.5);
+    background: radial-gradient(circle, transparent 40%, rgba(255, 255, 255, 0.1) 41%);
+    position: absolute;
+    pointer-events: none;
+}
+
+#scope-overlay::before,
+#scope-overlay::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+#scope-overlay::before {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    left: 0;
+}
+
+#scope-overlay::after {
+    height: 100%;
+    width: 2px;
+    top: 0;
+    left: 50%;
+}
+
+#character {
+    position: absolute;
+    bottom: 5%;
+    width: 20vw;
+    display: none;
+    z-index: 2;
+    transform: translateX(-50%) rotateY(0deg);
+    transition: transform 0.5s ease-out;
+}
+
+#character.flip {
+    transform: translateX(-50%) rotateY(180deg);
+}
+
+#sniper-image {
+    width: 100%;
+    height: auto;
+}
+
+#bullet {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 1.5s ease-out;
+}
+
+@keyframes moveTarget {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(20px, -15px); } /* Move slightly */
+    50% { transform: translate(-15px, 10px); } /* Move slightly */
+    75% { transform: translate(10px, -20px); } /* Move slightly */
+    100% { transform: translate(-20px, 15px); } /* Move slightly */
+}
+
+
+#target {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    display: none;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s ease-out;
+    animation: moveTarget 2s infinite alternate ease-in-out; /* Add animation */
+}
+
+
+#target:hover {
+    transform: rotateY(180deg);
+}
+
+#score, #timer, #high-score {
+    position: absolute;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 4; /* Above the scope */
+}
+
+#score {
+    top: 20px;
+    left: 20px;
+}
+
+#timer {
+    top: 20px;
+    right: 20px;
+}
+
+#high-score {
+    top: 60px;
+    left: 20px;
+    display: none;
+}
+
+#replay-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    font-size: 24px;
+    display: none;
+}
+
+.shot-feedback {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: yellow;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes bulletTravel {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(var(--bullet-x)) translateY(var(--bullet-y)); }
+}
